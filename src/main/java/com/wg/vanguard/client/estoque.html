@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Estoque — Sistema</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sidebar: #111827;
+      --sidebar-hover: #1f2937;
+      --sidebar-active: #1e3a6e;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --surface: #f9fafb;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --text: #111827;
+      --muted: #6b7280;
+      --input-bg: #f3f4f6;
+      --red: #ef4444;
+      --red-bg: #fef2f2;
+      --orange: #f59e0b;
+      --orange-bg: #fffbeb;
+      --green: #22c55e;
+      --green-bg: #f0fdf4;
+      --radius: 12px;
+      --font: 'DM Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--surface);
+      display: flex;
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 220px;
+      min-height: 100vh;
+      background: var(--sidebar);
+      display: flex;
+      flex-direction: column;
+      padding: 28px 0 24px;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 10;
+    }
+
+    .sidebar-logo {
+      padding: 0 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+    .logo-icon {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,.1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .sidebar-profile {
+      padding: 0 24px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      margin-bottom: 16px;
+    }
+    .avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .avatar-dot {
+      position: absolute;
+      bottom: 3px; right: 3px;
+      width: 12px; height: 12px;
+      background: #22c55e;
+      border-radius: 50%;
+      border: 2px solid var(--sidebar);
+    }
+    .sidebar-name {
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 500;
+    }
+
+    nav { flex: 1; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 24px;
+      color: rgba(255,255,255,.6);
+      font-size: .88rem;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+      text-decoration: none;
+    }
+    .nav-item:hover { background: var(--sidebar-hover); color: rgba(255,255,255,.9); }
+    .nav-item.active {
+      background: var(--sidebar-active);
+      color: #fff;
+      font-weight: 500;
+      position: relative;
+    }
+    .nav-item.active::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      border-radius: 2px 0 0 2px;
+    }
+
+    /* ── Main ── */
+    .main {
+      margin-left: 220px;
+      flex: 1;
+      padding: 40px 48px;
+      animation: fadeIn .35s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 28px;
+      letter-spacing: -.02em;
+    }
+    .page-title span { font-weight: 400; color: var(--muted); }
+
+    /* Search bar */
+    .search-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .search-wrap {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-wrap .s-icon {
+      position: absolute;
+      left: 16px;
+      color: #9ca3af;
+      display: flex;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 12px 18px 12px 44px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: .88rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .search-wrap input::placeholder { color: #9ca3af; }
+    .search-wrap input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+    }
+
+    .btn-search {
+      padding: 12px 24px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+      white-space: nowrap;
+    }
+    .btn-search:hover { background: var(--accent-hover); }
+
+    /* Card */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    /* Grid form */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 24px;
+    }
+    .form-grid .full { grid-column: 1 / -1; }
+
+    .field label {
+      display: block;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-wrap .fi {
+      position: absolute;
+      left: 14px;
+      color: #9ca3af;
+      display: flex;
+      pointer-events: none;
+    }
+    .input-wrap input,
+    .input-wrap select {
+      width: 100%;
+      padding: 11px 14px 11px 40px;
+      background: var(--input-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: .88rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      appearance: none;
+    }
+    .input-wrap input:focus,
+    .input-wrap select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.09);
+    }
+    .input-wrap input:disabled,
+    .input-wrap input[readonly] {
+      background: #f0f0f0;
+      color: var(--muted);
+      cursor: not-allowed;
+    }
+    .input-wrap .chevron {
+      position: absolute;
+      right: 14px;
+      color: #9ca3af;
+      pointer-events: none;
+    }
+
+    /* Action buttons */
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: .85rem;
+      font-weight: 600;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: all .18s;
+    }
+
+    .btn-delete {
+      background: var(--red-bg);
+      color: var(--red);
+      border-color: #fca5a5;
+    }
+    .btn-delete:hover { background: #fee2e2; }
+
+    .btn-save {
+      background: var(--orange-bg);
+      color: #92400e;
+      border-color: #fcd34d;
+    }
+    .btn-save:hover { background: #fef3c7; }
+
+    .btn-add {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+    .btn-add:hover { background: #16a34a; }
+
+    .actions-right { display: flex; gap: 10px; }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">
+      <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="sidebar-profile">
+    <div class="avatar">
+      <svg width="32" height="32" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+      <span class="avatar-dot"></span>
+    </div>
+    <span class="sidebar-name">Administrador</span>
+  </div>
+
+  <nav>
+    <a class="nav-item" href="#">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      Início
+    </a>
+    <a class="nav-item" href="#">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+      Funcionário
+    </a>
+    <a class="nav-item active" href="#">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+      </svg>
+      Estoque
+    </a>
+  </nav>
+</aside>
+
+<!-- Main Content -->
+<main class="main">
+  <h1 class="page-title">Gerenciamento de Estoque <span>- Detalhes do Produto</span></h1>
+
+  <!-- Search -->
+  <div class="search-bar">
+    <div class="search-wrap">
+      <span class="s-icon">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+      <input type="text" id="searchInput" placeholder="Pesquisar por ID ou Nome..."/>
+    </div>
+    <button class="btn-search" onclick="pesquisar()">Pesquisar</button>
+  </div>
+
+  <!-- Form Card -->
+  <div class="card">
+    <div class="card-title">Informações do Produto</div>
+
+    <div class="form-grid">
+      <!-- Nome -->
+      <div class="field">
+        <label>Nome do Produto</label>
+        <div class="input-wrap">
+          <span class="fi">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>
+            </svg>
+          </span>
+          <input type="text" id="nome" placeholder="Nome do Produto"/>
+        </div>
+      </div>
+
+      <!-- Categoria -->
+      <div class="field">
+        <label>Categoria</label>
+        <div class="input-wrap">
+          <span class="fi">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </span>
+          <select id="categoria">
+            <option value="">Selecione...</option>
+            <option>Eletrônicos</option>
+            <option>Roupas</option>
+            <option>Alimentos</option>
+            <option>Ferramentas</option>
+            <option>Outros</option>
+          </select>
+          <span class="chevron">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- Preço -->
+      <div class="field">
+        <label>Preço (R$)</label>
+        <div class="input-wrap">
+          <span class="fi">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+          </span>
+          <input type="number" id="preco" placeholder="0,00" step="0.01"/>
+        </div>
+      </div>
+
+      <!-- Tamanho -->
+      <div class="field">
+        <label>Tamanho</label>
+        <div class="input-wrap">
+          <span class="fi">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </span>
+          <select id="tamanho">
+            <option value="">Selecione...</option>
+            <option>PP</option>
+            <option>P</option>
+            <option>M</option>
+            <option>G</option>
+            <option>GG</option>
+            <option>Único</option>
+          </select>
+          <span class="chevron">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- Quantidade -->
+      <div class="field">
+        <label>Quantidade</label>
+        <div class="input-wrap">
+          <span class="fi">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+          </span>
+          <input type="number" id="quantidade" placeholder="0"/>
+        </div>
+      </div>
+
+      <!-- ID do Produto -->
+      <div class="field">
+        <label>ID do Produto</label>
+        <div class="input-wrap">
+          <span class="fi">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/>
+            </svg>
+          </span>
+          <input type="text" id="produtoId" readonly placeholder="Gerado automaticamente"/>
+        </div>
+      </div>
+
+      <!-- Fornecedor -->
+      <div class="field full">
+        <label>Fornecedor</label>
+        <div class="input-wrap">
+          <span class="fi">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </span>
+          <input type="text" id="fornecedor" placeholder="Nome do fornecedor"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-delete" onclick="deletar()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+          <path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+        </svg>
+        Deletar
+      </button>
+      <div class="actions-right">
+        <button class="btn btn-save" onclick="salvarEdicao()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+          </svg>
+          Salvar Edição
+        </button>
+        <button class="btn btn-add" onclick="adicionar()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Adicionar
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Simple ID counter
+  let idCounter = 1000;
+
+  function gerarId() {
+    return 'PRD-' + (++idCounter);
+  }
+
+  function limparForm() {
+    ['nome','preco','quantidade','fornecedor','produtoId'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('categoria').value = '';
+    document.getElementById('tamanho').value = '';
+  }
+
+  function validar() {
+    const campos = ['nome','preco','quantidade','fornecedor'];
+    for (const c of campos) {
+      if (!document.getElementById(c).value.trim()) {
+        alert('Preencha todos os campos obrigatórios.');
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function adicionar() {
+    if (!validar()) return;
+    document.getElementById('produtoId').value = gerarId();
+    alert('Produto adicionado com sucesso!');
+    limparForm();
+  }
+
+  function salvarEdicao() {
+    const id = document.getElementById('produtoId').value;
+    if (!id) { alert('Nenhum produto selecionado para edição.'); return; }
+    if (!validar()) return;
+    alert('Produto salvo com sucesso!');
+  }
+
+  function deletar() {
+    const id = document.getElementById('produtoId').value;
+    if (!id) { alert('Nenhum produto selecionado.'); return; }
+    if (confirm('Tem certeza que deseja deletar o produto ' + id + '?')) {
+      alert('Produto deletado.');
+      limparForm();
+    }
+  }
+
+  function pesquisar() {
+    const q = document.getElementById('searchInput').value.trim();
+    if (!q) { alert('Digite um ID ou nome para pesquisar.'); return; }
+    // Demo: auto-fill with mock data
+    document.getElementById('nome').value = 'Produto Demo';
+    document.getElementById('preco').value = '149.90';
+    document.getElementById('quantidade').value = '42';
+    document.getElementById('fornecedor').value = 'Fornecedor Exemplo LTDA';
+    document.getElementById('produtoId').value = q.startsWith('PRD') ? q : 'PRD-' + q;
+    document.getElementById('categoria').value = 'Eletrônicos';
+    document.getElementById('tamanho').value = 'Único';
+  }
+</script>
+</body>
+</html>
