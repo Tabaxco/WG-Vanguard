@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — WG Vanguard</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="login.css"/>
+</head>
+<body>
+
+<div class="bg-deco">
+  <div class="hex hex-1"></div>
+  <div class="hex hex-2"></div>
+  <div class="hex hex-3"></div>
+</div>
+
+<div class="brand">
+  <div class="brand-name">
+    <span class="wg">WG</span>
+    <span class="separator"></span>
+    <span class="vanguard">Vanguard</span>
+  </div>
+  <div class="brand-tagline">Sistema de Gestão</div>
+</div>
+
+<div class="card">
+  <h1>Login</h1>
+
+  <div class="field">
+    <label for="email">E-mail</label>
+    <div class="input-wrap">
+      <span class="icon">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="M2 7l10 7 10-7"/>
+        </svg>
+      </span>
+      <input type="email" id="email" placeholder="seu@email.com" autocomplete="email"/>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="senha">Senha</label>
+    <div class="input-wrap">
+      <span class="icon">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+          <circle cx="8" cy="15" r="3"/>
+          <path d="M11 15h8M16 12v6"/>
+        </svg>
+      </span>
+      <input type="password" id="senha" placeholder="••••••••" autocomplete="current-password"/>
+    </div>
+  </div>
+
+  <button class="btn" onclick="handleLogin()">Entrar</button>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>
