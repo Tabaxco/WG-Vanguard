@@ -23,7 +23,7 @@ public class EstoqueService {
 
     public Estoque atualizar (Long id, Estoque estoque) {
         if (estoqueRepository.existsById(id)) {
-            estoque.setProdutoId(id);
+            estoque.setId_produto(id);
             return estoqueRepository.save(estoque);
         } else {
             throw new RuntimeException("Produto não encontrado no estoque");

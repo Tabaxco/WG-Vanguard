@@ -11,15 +11,15 @@ import jakarta.validation.constraints.NotNull;
 public class Estoque {
 
     @Id
-    private long produtoId;
+    private long id_produto;
     private double quantidade;
 
-    public long getProdutoId() {
-        return produtoId;
+    public long getId_produto() {
+        return id_produto;
     }
 
-    public void setProdutoId(long produtoId) {
-        this.produtoId = produtoId;
+    public void setId_produto(long id_produto) {
+        this.id_produto = id_produto;
     }
 
     public double getQuantidade() {

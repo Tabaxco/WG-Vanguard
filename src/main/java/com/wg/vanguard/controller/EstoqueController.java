@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/estoque")
+@CrossOrigin(origins = "*")
 public class EstoqueController {
     @Autowired
     private EstoqueService estoqueService;

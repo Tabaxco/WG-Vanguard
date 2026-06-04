@@ -7,6 +7,6 @@ function handleLogin() {
         return;
     }
 
-    // redirect to dashboard
+
     window.location.href = 'estoque.html';
 }
