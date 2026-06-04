@@ -1,5 +1,8 @@
-const API = 'http://localhost:8080/funcionarios';
+if (!sessionStorage.getItem('usuario')) {
+    window.location.href = '../login/login.html';
+}
 
+const API = 'http://localhost:8080/funcionarios';
 
 function mostrarToast(mensagem, tipo) {
     const toast = document.getElementById('toast');
@@ -154,3 +157,6 @@ async function deletar() {
 
 document.getElementById('searchInput')
     .addEventListener('keydown', e => { if (e.key === 'Enter') pesquisar(); });
+
+document.getElementById('dataContratacao').max = new Date().toISOString().split('T')[0];
+document.getElementById('dataContratacao').min = '1900-01-01';
