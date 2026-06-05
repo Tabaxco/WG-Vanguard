@@ -1,3 +1,7 @@
+if (!sessionStorage.getItem('usuario')) {
+  window.location.href = '../login/login.html';
+}
+
 const API = 'http://localhost:8080';
 
 const cats  = ["Camiseta","Calça","Vestido","Saia","Jaqueta","Moletom","Shorts","Blusa","Bermuda","Acessório"];

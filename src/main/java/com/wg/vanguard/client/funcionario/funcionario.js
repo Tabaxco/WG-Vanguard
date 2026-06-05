@@ -1,4 +1,6 @@
-
+if (!sessionStorage.getItem('usuario')) {
+    window.location.href = '../login/login.html';
+}
 
 const API = 'http://localhost:8080/funcionarios';
 

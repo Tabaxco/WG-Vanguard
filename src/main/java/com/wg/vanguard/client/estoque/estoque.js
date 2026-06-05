@@ -1,3 +1,7 @@
+if (!sessionStorage.getItem('usuario')) {
+    window.location.href = '../login/login.html';
+}
+
 const API_PRODUTOS = 'http://localhost:8080/produtos';
 
 function mostrarToast(mensagem, tipo) {
