@@ -8,225 +8,28 @@
     <link rel="stylesheet" href="estoque.css"/>
 </head>
 <body>
-
 <aside class="sidebar">
     <div class="sidebar-logo">
         <div class="logo-icon">
-            <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-            </svg>
+            <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"> <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/> </svg>
         </div>
     </div>
-
-    <div class="sidebar-profile">
-        <div class="avatar">
-            <svg width="32" height="32" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" viewBox="0 0 24 24">
-                <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-            </svg>
-            <span class="avatar-dot"></span>
-        </div>
+    <div class="sidebar-profile"> <div class="avatar">
+        <svg width="32" height="32" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" viewBox="0 0 24 24"> <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/> </svg>
+        <span class="avatar-dot"></span>
+    </div>
         <span class="sidebar-name">Administrador</span>
     </div>
-
     <nav>
-        <a class="nav-item" href="#">
+        <a class="nav-item" href="../orcamento/orcamento.html">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-            </svg>
-            Início
-        </a>
-        <a class="nav-item" href="../funcionario/funcionario.html">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
-                <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-            </svg>
-            Funcionário
-        </a>
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg> Orçamento
+        </a> <a class="nav-item" href="../funcionario/funcionario.html">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"> <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/> </svg>
+        Funcionário </a>
         <a class="nav-item active" href="#">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
                 <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-            </svg>
-            Estoque
-        </a>
-    </nav>
-</aside>
-
-<main class="main">
-    <h1 class="page-title">Gerenciamento de Estoque <span>- Produto & Quantidade</span></h1>
-
-
-    <div class="search-bar">
-        <div class="search-wrap">
-            <span class="s-icon">
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-                </svg>
-            </span>
-            <input type="text" id="searchProdutoInput" placeholder="Pesquisar produto por ID..."/>
-        </div>
-        <button class="btn-search" onclick="pesquisarProduto()">Pesquisar</button>
-    </div>
-
-    <div id="toast" class="toast hidden"></div>
-
-    <div class="card">
-        <div class="card-title">Informações do Produto</div>
-
-        <div class="form-grid">
-            <div class="field">
-                <label>Nome do Produto</label>
-                <div class="input-wrap">
-                    <span class="fi">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>
-                        </svg>
-                    </span>
-                    <input type="text" id="nome" placeholder="Nome do produto"/>
-                </div>
-            </div>
-
-
-            <div class="field">
-                <label>Preço (R$)</label>
-                <div class="input-wrap">
-                    <span class="fi">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                            <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
-                        </svg>
-                    </span>
-                    <input type="number" id="preco" placeholder="0,00" step="0.01" min="0"/>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Categoria</label>
-                <div class="input-wrap">
-                    <span class="fi">
-                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24">
-                            <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
-                            <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
-                        </svg>
-                    </span>
-                    <select id="categoria">
-                        <option value="">Selecione...</option>
-                        <option>Camiseta</option>
-                        <option>Calça</option>
-                        <option>Vestido</option>
-                        <option>Saia</option>
-                        <option>Jaqueta</option>
-                        <option>Moletom</option>
-                        <option>Shorts</option>
-                        <option>Blusa</option>
-                        <option>Bermuda</option>
-                        <option>Acessório</option>
-                    </select>
-                </div>
-            </div>
-
-
-            <div class="field">
-                <label>Tamanho</label>
-                <div class="input-wrap">
-                    <span class="fi">
-                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                        </svg>
-                    </span>
-                    <select id="tamanho">
-                        <option value="">Selecione...</option>
-                        <option>PP</option>
-                        <option>P</option>
-                        <option>M</option>
-                        <option>G</option>
-                        <option>GG</option>
-                        <option>XG</option>
-                        <option>36</option>
-                        <option>38</option>
-                        <option>40</option>
-                        <option>42</option>
-                        <option>44</option>
-                        <option>46</option>
-                        <option>48</option>
-                        <option>Único</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Fornecedor</label>
-                <div class="input-wrap">
-                    <span class="fi">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                            <path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/>
-                            <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-                        </svg>
-                    </span>
-                    <input type="text" id="fornecedor" placeholder="Nome do fornecedor"/>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>ID do Produto</label>
-                <div class="input-wrap">
-                    <span class="fi">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/>
-                        </svg>
-                    </span>
-                    <input type="text" id="id_produto" readonly placeholder="Gerado automaticamente"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-divider">
-            <span class="divider-label">
-                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 0 0">
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                </svg>
-            </span>
-        </div>
-
-        <div class="form-grid form-grid--narrow">
-            <div class="field">
-                <label>Quantidade</label>
-                <div class="input-wrap">
-                    <span class="fi">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                        </svg>
-                    </span>
-                    <input type="number" id="quantidade" placeholder="0" min="0" step="1"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="actions">
-            <button class="btn btn-delete" onclick="deletarProduto()">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-                    <path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
-                </svg>
-                Deletar
-            </button>
-            <div class="actions-right">
-                <button class="btn btn-save" onclick="salvarEdicao()">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-                        <polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
-                    </svg>
-                    Salvar Edição
-                </button>
-                <button class="btn btn-add" onclick="adicionarProduto()">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                    </svg>
-                    Adicionar
-                </button>
-            </div>
-        </div>
-    </div>
-</main>
-
-<script src="estoque.js"></script>
-</body>
-</html>
+            </svg> Estoque </a> </nav> </aside> <main class="main"> <h1 class="page-title">Gerenciamento de Estoque <span>- Produto & Quantidade</span></h1> <div class="search-bar"> <div class="search-wrap"> <span class="s-icon"> <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"> <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/> </svg> </span> <input type="text" id="searchProdutoInput" placeholder="Pesquisar produto por ID..."/> </div> <button class="btn-search" onclick="pesquisarProduto()">Pesquisar</button> </div> <div id="toast" class="toast hidden"></div> <div class="card"> <div class="card-title">Informações do Produto</div> <div class="form-grid"> <div class="field"> <label>Nome do Produto</label> <div class="input-wrap"> <span class="fi"> <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"> <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/> </svg> </span> <input type="text" id="nome" placeholder="Nome do produto"/> </div> </div> <div class="field"> <label>Preço (R$)</label> <div class="input-wrap"> <span class="fi"> <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"> <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/> </svg> </span> <input type="number" id="preco" placeholder="0,00" step="0.01" min="0"/> </div> </div> <div class="field"> <label>Categoria</label> <div class="input-wrap"> <span class="fi"> <svg width="14" height="14" fill="none" viewBox="0 0 24 24"> <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/> <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/> </svg> </span> <select id="categoria"> <option value="">Selecione...</option> <option>Camiseta</option> <option>Calça</option> <option>Vestido</option> <option>Saia</option> <option>Jaqueta</option> <option>Moletom</option> <option>Shorts</option> <option>Blusa</option> <option>Bermuda</option> <option>Acessório</option> </select> </div> </div> <div class="field"> <label>Tamanho</label> <div class="input-wrap"> <span class="fi"> <svg width="14" height="14" fill="none" viewBox="0 0 24 24"> <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/> <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/> </svg> </span> <select id="tamanho"> <option value="">Selecione...</option> <option>PP</option> <option>P</option> <option>M</option> <option>G</option> <option>GG</option> <option>XG</option> <option>36</option> <option>38</option> <option>40</option> <option>42</option> <option>44</option> <option>46</option> <option>48</option> <option>Único</option> </select> </div> </div> <div class="field"> <label>Cor</label> <div class="input-wrap"> <span class="fi"> <svg width="14" height="14" fill="none" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10"/> <path d="M12 2a10 10 0 0 1 0 20"/> </svg> </span> <select id="cor"> <option value="">Selecione...</option> <option>Preto</option> <option>Branco</option> <option>Cinza</option> <option>Azul</option> <option>Vermelho</option> <option>Verde</option> <option>Rosa</option> <option>Amarelo</option> <option>Bege</option> <option>Marrom</option> <option>Vinho</option> <option>Laranja</option> </select> </div> </div> <div class="field"> <label>Fornecedor</label> <div class="input-wrap"> <span class="fi"> <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"> <path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/> <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/> </svg> </span> <input type="text" id="fornecedor" placeholder="Nome do fornecedor"/> </div> </div> <div class="field"> <label>ID do Produto</label> <div class="input-wrap"> <span class="fi"> <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"> <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/> </svg> </span> <input type="text" id="id_produto" readonly placeholder="Gerado automaticamente"/> </div> </div> </div> <div class="section-divider"> <span class="divider-label"> <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 0 0"> <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/> </svg> </span> </div> <div class="form-grid form-grid--narrow"> <div class="field"> <label>Quantidade</label> <div class="input-wrap"> <span class="fi"> <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"> <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/> </svg> </span> <input type="number" id="quantidade" placeholder="0" min="0" step="1"/> </div> </div> </div> <div class="actions"> <button class="btn btn-delete" onclick="deletarProduto()"> <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"> <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/> <path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/> </svg> Deletar </button> <div class="actions-right"> <button class="btn btn-save" onclick="salvarEdicao()"> <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"> <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/> <polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/> </svg> Salvar Edição </button> <button class="btn btn-add" onclick="adicionarProduto()"> <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"> <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/> </svg> Adicionar </button> </div> </div> </div> </main> <script src="estoque.js"></script> </body> </html>

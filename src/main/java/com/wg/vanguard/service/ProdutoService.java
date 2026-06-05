@@ -27,6 +27,7 @@ public class ProdutoService {
         produto.setTamanho(produtoAtualizado.getTamanho());
         produto.setFornecedor(produtoAtualizado.getFornecedor());
         produto.setQuantidade(produtoAtualizado.getQuantidade());
+        produto.setCor(produtoAtualizado.getCor());
 
         return produtoRepository.save(produto);
     }

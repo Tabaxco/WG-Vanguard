@@ -25,7 +25,7 @@ async function handleLogin() {
 
         const usuario = await res.json();
         sessionStorage.setItem('usuario', JSON.stringify(usuario));
-        window.location.href = '../estoque/estoque.html';
+        window.location.href = '../orcamento/orcamento.html';
 
     } catch (err) {
         mostrarErro('Erro ao conectar com o servidor.');

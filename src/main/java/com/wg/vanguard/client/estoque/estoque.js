@@ -1,7 +1,3 @@
-if (!sessionStorage.getItem('usuario')) {
-    window.location.href = '../login/login.html';
-}
-
 const API_PRODUTOS = 'http://localhost:8080/produtos';
 
 function mostrarToast(mensagem, tipo) {
@@ -17,6 +13,7 @@ function preencherForm(p) {
     document.getElementById('preco').value       = p.preco      ?? '';
     document.getElementById('categoria').value   = p.categoria  ?? '';
     document.getElementById('tamanho').value     = p.tamanho    ?? '';
+    document.getElementById('cor').value         = p.cor        ?? '';
     document.getElementById('fornecedor').value  = p.fornecedor ?? '';
     document.getElementById('quantidade').value  = p.quantidade ?? '';
 }
@@ -27,6 +24,7 @@ function limparForm() {
     });
     document.getElementById('categoria').value = '';
     document.getElementById('tamanho').value   = '';
+    document.getElementById('cor').value       = '';
 }
 
 function coletarDados() {
@@ -35,6 +33,7 @@ function coletarDados() {
         preco:      parseFloat(document.getElementById('preco').value),
         categoria:  document.getElementById('categoria').value,
         tamanho:    document.getElementById('tamanho').value,
+        cor:        document.getElementById('cor').value,
         fornecedor: document.getElementById('fornecedor').value.trim(),
         quantidade: parseFloat(document.getElementById('quantidade').value)
     };

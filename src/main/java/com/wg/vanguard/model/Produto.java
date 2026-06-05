@@ -15,6 +15,15 @@ public class Produto {
     private String tamanho;
     private String fornecedor;
     private double quantidade;
+    private String cor;
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
