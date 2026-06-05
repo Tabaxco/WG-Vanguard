@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/orcamentos")
-@CrossOrigin(origins = "*") // ajuste para seu domínio em produção
+@CrossOrigin(origins = "*")
 public class OrcamentoController {
 
     private final OrcamentoService orcamentoService;

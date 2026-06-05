@@ -18,8 +18,8 @@ public class OrcamentoRequest {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataOrcamento;
 
-    private double subtotal;   // soma bruta dos itens
-    private double desconto;   // percentual (0–100)
+    private double subtotal;
+    private double desconto;
 
     private List<ItemOrcamento> itens;
 
