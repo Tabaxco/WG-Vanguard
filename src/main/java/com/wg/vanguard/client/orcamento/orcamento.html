@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orçamento – WG Vanguard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <link rel="stylesheet" href="orcamento.css" />
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="s-ring"><i class="ti ti-hexagon"></i></div>
+  <div class="sidebar-user">
+    <div class="avatar"><i class="ti ti-user"></i><div class="sdot"></div></div>
+    <span>Administrador</span>
+  </div>
+  <nav class="snav">
+    <a class="ni" href="#">        <i class="ti ti-home"></i>Início</a>
+    <a class="ni" href="#">        <i class="ti ti-users"></i>Funcionário</a>
+    <a class="ni" href="#">        <i class="ti ti-package"></i>Estoque</a>
+    <a class="ni active" href="#"> <i class="ti ti-file-invoice"></i>Orçamento</a>
+  </nav>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <h1>Gerenciamento de Orçamento <span>– Detalhes do Orçamento</span></h1>
+  </div>
+
+  <div class="sbar">
+    <div class="sw">
+      <i class="ti ti-search"></i>
+      <input type="text" placeholder="Pesquisar por ID ou CPF do cliente..." />
+    </div>
+    <button class="bsearch">Pesquisar</button>
+  </div>
+
+  <div class="cnt">
+
+    <!-- Dados do cliente -->
+    <div class="card">
+      <div class="ctitle">Dados do cliente</div>
+      <div class="fg3">
+        <div class="f">
+          <div class="flabel">Nome do cliente</div>
+          <div class="fbox"><i class="ti ti-user"></i><input type="text" placeholder="Nome completo" /></div>
+        </div>
+        <div class="f">
+          <div class="flabel">CPF</div>
+          <div class="fbox"><i class="ti ti-id-badge"></i><input type="text" id="cpf" placeholder="000.000.000-00" oninput="mascCPF(this)" maxlength="14" /></div>
+        </div>
+        <div class="f">
+          <div class="flabel">Telefone</div>
+          <div class="fbox"><i class="ti ti-phone"></i><input type="text" id="tel" placeholder="(00) 00000-0000" oninput="mascTel(this)" maxlength="15" /></div>
+        </div>
+        <div class="f">
+          <div class="flabel">Status</div>
+          <div class="fbox">
+            <i class="ti ti-circle-dot"></i>
+            <select onchange="selFill(this)"><option value="">Selecione...</option><option>Pendente</option><option>Aprovado</option><option>Cancelado</option></select>
+            <span class="arr">&#8964;</span>
+          </div>
+        </div>
+        <div class="f">
+          <div class="flabel">Data do orçamento</div>
+          <div class="fbox"><i class="ti ti-calendar"></i><input type="date" id="dataOrc" /></div>
+        </div>
+        <div class="f">
+          <div class="flabel">ID do orçamento</div>
+          <div class="fbox ro"><i class="ti ti-hash"></i><input type="text" id="idOrc" readonly /></div>
+        </div>
+        <div class="f s3">
+          <div class="flabel">Observações</div>
+          <div class="fbox"><i class="ti ti-notes"></i><input type="text" placeholder="Ex: cliente prefere entrega, aguardando nova coleção..." /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ctitle">Itens do orçamento</div>
+      <div class="thead">
+        <span>Peça / Referência</span>
+        <span>Categoria</span>
+        <span>Cor</span>
+        <span>Tamanho</span>
+        <span>Qtd.</span>
+        <span>Preço unit.</span>
+        <span></span>
+      </div>
+      <div id="itemsList"></div>
+      <button class="badd" onclick="adicionarItem()"><i class="ti ti-plus"></i>Adicionar peça</button>
+
+      <div class="totals">
+        <div class="tr"><span class="l">Subtotal</span><span class="v" id="subtotal">R$ 0,00</span></div>
+        <div class="tr">
+          <span class="l">Desconto (%)</span>
+          <span class="v"><input class="dinput" type="number" id="desconto" value="0" min="0" max="100" step="1" oninput="calcTotals()" /></span>
+        </div>
+        <div class="tdiv"></div>
+        <div class="tr g"><span class="l">Total</span><span class="v" id="totalGeral">R$ 0,00</span></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="card" style="padding:14px 24px;">
+      <div class="foot">
+        <div class="fl">
+          <button class="btn bd" onclick="deletar()"><i class="ti ti-trash"></i>Deletar</button>
+        </div>
+        <div class="fr">
+          <button class="btn bw" onclick="salvar()"><i class="ti ti-device-floppy"></i>Salvar Edição</button>
+          <button class="btn bp" onclick="novoOrcamento()"><i class="ti ti-plus"></i>Novo Orçamento</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="orcamento.js"></script>
+</body>
+</html>

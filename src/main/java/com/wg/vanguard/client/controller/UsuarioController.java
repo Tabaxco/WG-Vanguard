@@ -1,4 +1,4 @@
-package com.wg.vanguard.controller;
+package com.wg.vanguard.client.controller;
 
 import com.wg.vanguard.dto.LoginRequest;
 import com.wg.vanguard.model.Usuario;

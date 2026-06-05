@@ -1,4 +1,4 @@
-package com.wg.vanguard.controller;
+package com.wg.vanguard.client.controller;
 
 import com.wg.vanguard.model.Funcionario;
 import com.wg.vanguard.service.FuncionarioService;
