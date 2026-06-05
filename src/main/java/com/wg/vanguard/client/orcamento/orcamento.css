@@ -219,7 +219,6 @@ nav { flex: 1; }
 .toast.error   { background: var(--red-bg);   color: #991b1b; border: 1px solid #fecaca; }
 .toast.warn    { background: var(--orange-bg); color: #92400e; border: 1px solid #fcd34d; }
 
-/* ── Card ── */
 .card {
   background: var(--card);
   border-radius: var(--radius);
@@ -235,7 +234,6 @@ nav { flex: 1; }
   color: var(--text);
 }
 
-/* ── Form grid ── */
 .form-grid {
   display: grid;
   gap: 18px 24px;

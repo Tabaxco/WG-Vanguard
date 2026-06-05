@@ -114,7 +114,6 @@ input:focus {
     box-shadow: 0 0 0 3px rgba(74,127,193,.12);
 }
 
-/* Brand */
 .brand {
     text-align: center;
     animation: fadeUp .4s cubic-bezier(.22,1,.36,1) both;

@@ -8,12 +8,10 @@ import java.util.List;
 
 public class OrcamentoRequest {
 
-    // Dados do cliente
     private String cpf;
     private String nomeCliente;
     private String telefone;
 
-    // Dados do orçamento
     private String status;
     private String observacoes;
 

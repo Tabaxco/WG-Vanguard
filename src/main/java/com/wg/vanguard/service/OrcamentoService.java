@@ -23,7 +23,6 @@ public class OrcamentoService {
 
     public Orcamento criarOrcamento(OrcamentoRequest request) {
 
-        // Upsert de cliente: busca pelo CPF; se não existir, cadastra
         Cliente cliente = clienteService.buscarOuCriarCliente(
                 request.getCpf(),
                 request.getNomeCliente(),

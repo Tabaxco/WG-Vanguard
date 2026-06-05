@@ -86,8 +86,6 @@ function upd(id, field, value) {
   calcTotals();
 }
 
-/* ── Totais ── */
-
 function calcTotals() {
   const sub  = items.reduce((s, i) => s + (i.qtd * i.preco), 0);
   const desc = Math.min(100, Math.max(0, parseFloat(document.getElementById('desconto').value) || 0));
@@ -95,7 +93,6 @@ function calcTotals() {
   document.getElementById('totalGeral').textContent = fmtBRL(sub * (1 - desc / 100));
 }
 
-/* ── Formulário ── */
 
 function lerFormulario() {
   const sub  = items.reduce((s, i) => s + (i.qtd * i.preco), 0);
@@ -148,8 +145,6 @@ function preencherFormulario(orc) {
 
   renderItems();
 }
-
-/* ── CRUD ── */
 
 async function pesquisar() {
   const q = document.getElementById('searchInput').value.trim();
