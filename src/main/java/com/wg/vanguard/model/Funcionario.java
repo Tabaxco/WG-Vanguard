@@ -1,10 +1,7 @@
 package com.wg.vanguard.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -14,9 +11,12 @@ public class Funcionario {
     @GeneratedValue (strategy =  GenerationType.AUTO)
     private long id;
     private String nome;
+    @Column(length = 20)
     private String telefone;
     private String email;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @Column(unique = true, nullable = false, length = 11)
+    private String cpf;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataContratacao;
 
     public long getId() {
@@ -49,6 +49,14 @@ public class Funcionario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public LocalDate getDataContratacao() {
