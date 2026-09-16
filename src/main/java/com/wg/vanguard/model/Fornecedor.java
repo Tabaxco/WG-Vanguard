@@ -11,6 +11,7 @@ public class Fornecedor {
     private String nome;
     @Column(length = 20)
     private String telefone;
+    private String email;
     @Column(unique = true, nullable = false)
     private String cnpj;
 
@@ -36,6 +37,14 @@ public class Fornecedor {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getCnpj() {

@@ -13,6 +13,7 @@ public class Cliente {
     private String cpf;
     @Column(length = 20)
     private String telefone;
+    private String email;
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Pedido> pedidos;
 
@@ -46,6 +47,14 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<Pedido> getPedidos() {
