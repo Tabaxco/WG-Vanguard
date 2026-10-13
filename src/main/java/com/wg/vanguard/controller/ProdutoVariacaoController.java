@@ -20,7 +20,8 @@ public class ProdutoVariacaoController {
     public ResponseEntity<?> salvar(@RequestBody ProdutoVariacaoRequest request) {
         try {
             ProdutoVariacao produtoVariacao = produtoVariacaoService.salvarVariacao(
-                    request.idProduto(), request.cor(), request.tamanho(), request.valorTotal());
+                    request.idProduto(), request.cor(), request.tamanho(),
+                    request.valorTotal(), request.estoque());
             return ResponseEntity.status(HttpStatus.CREATED).body(produtoVariacao);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
@@ -63,5 +64,5 @@ public class ProdutoVariacaoController {
     }
 
     public record ProdutoVariacaoRequest(long idProduto, String cor, String tamanho,
-                                         BigDecimal valorTotal, long estoque){}
+                                         BigDecimal valorTotal, long estoque) {}
 }

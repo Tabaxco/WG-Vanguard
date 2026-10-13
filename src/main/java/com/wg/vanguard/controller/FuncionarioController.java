@@ -20,8 +20,8 @@ public class FuncionarioController {
     @PostMapping
     public ResponseEntity<?> salvar(@RequestBody FuncionarioRequest request) {
         try {
-            Funcionario funcionario = funcionarioService.salvarFuncionario(request.nome(),
-                    request.email(), request.telefone(), request.cpf(), request.dataContratacao());
+            Funcionario funcionario = funcionarioService.salvarFuncionario(request.cpf(),
+                    request.nome(), request.telefone(), request.email(), request.dataContratacao());
             return ResponseEntity.status(HttpStatus.CREATED).body(funcionario);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());

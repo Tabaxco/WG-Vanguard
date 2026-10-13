@@ -5,10 +5,9 @@ import com.wg.vanguard.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/fornecedores")
 public class FornecedorController {
@@ -26,6 +25,11 @@ public class FornecedorController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<?> listar() {
+        return ResponseEntity.ok(fornecedorService.listarFornecedores());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> buscar(@PathVariable long id) {
         try {
@@ -35,7 +39,7 @@ public class FornecedorController {
         }
     }
 
-    @GetMapping("/cpnj/{cnpj}")
+    @GetMapping("/cnpj/{cnpj}")
     public ResponseEntity<?> buscar(@PathVariable String cnpj) {
         try {
             return ResponseEntity.ok(fornecedorService.buscarFornecedor(cnpj));
